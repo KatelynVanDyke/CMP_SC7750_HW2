@@ -1,0 +1,44 @@
+Names of team members:
+  Olivia LaVal
+  Katelyn Van Dyke
+
+Programming language used:
+  Python
+
+------------------------------
+
+Uniform cost tree search:
+  Implementation description:
+  Results:
+    First 5 search nodes:
+    Total num of nodes expanded:
+    Total num of nodes generated:
+    CPU execution time:
+    Solution:
+      Sequence of moves:
+      Number of moves:
+      Cost:
+
+Uniform cost graph search:
+  Implementation description:
+  Results:
+    First 5 search nodes:
+    Total num of nodes expanded:
+    Total num of nodes generated:
+    CPU execution time:
+    Solution:
+      Sequence of moves:
+      Number of moves:
+      Cost:
+
+Iterative deepening tree search:
+  Implementation description:
+  Results:
+    First 5 search nodes:
+    Total num of nodes expanded:
+    Total num of nodes generated:
+    CPU execution time:
+    Solution:
+      Sequence of moves:
+      Number of moves:
+      Cost:

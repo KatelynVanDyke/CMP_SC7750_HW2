@@ -1,10 +1,15 @@
 import copy
 
-
 class Location:
     def __init__(self, x, y):
         self.x = x
         self.y = y
+
+    def __str__(self):
+        return "(" + str(self.x) + ", " + str(self.y) + ") "
+
+    def __repr__(self):
+        return str(self)
 
 
 class Node:
@@ -30,19 +35,26 @@ instance2 = [['W', 'W', 'W', 'W', 'W', 'W'],
              ['W', 'C', 'C', 'C', 'C', 'C']]
 
 
-# problemSpace -> a matrix of what's clean and dirty
-# initialLocation -> the location of the vaccuum
-def treeSearch(problemSpace, initialLocation) -> Node:
+def graphSearch(problemSpace, initialLocation) -> Node:
+    closed = []
     fringe = []
     fringe = Insert(Make_Node(initialLocation.x, initialLocation.y, problemSpace, 0), fringe)
     while True:
         if len(fringe) == 0:
             return None
         currNode = fringe.pop(0)
-        print(str(currNode.x) + ", " + str(currNode.y))
         if Goal_Test(currNode.state):
             return currNode
-        fringe = Insert_All(Expand(currNode), fringe)
+        # expand currNode only if not already in the closed list
+        nodeLocation = Location(currNode.x, currNode.y)
+        found = False
+        for elem in closed:
+            if elem.x == nodeLocation.x and elem.y == nodeLocation.y:
+                found = True
+        if found == False:
+            print(str(currNode.x) + ", " + str(currNode.y) + ";  " + str(closed))
+            closed.append(nodeLocation)
+            fringe = Insert_All(Expand(currNode), fringe)
 
 
 def Insert(node, fringe):
@@ -95,14 +107,14 @@ def Goal_Test(problemSpace) -> bool:
     return True
 
 
-problemSpace1 = copy.deepcopy(instance1)
-result1 = treeSearch(problemSpace1, Location(2, 2))
-print("\nresult: " + str(result1.x) + " " + str(result1.y) + " " + str(result1.cost))
-print("Problem Space:")
-for i in range(max_x+1):
-    for j in range(max_y+1):
-        print(result1.state[i][j], end='')
-    print('')
-
-# result2 = treeSearch(instance2, Location(3, 2))
-# print(str(result2.x) + " " + str(result2.y) + " " + str(result2.cost))
+graphProbSpace1 = copy.deepcopy(instance1)
+graphResult1 = graphSearch(graphProbSpace1, Location(2,2))
+if graphResult1 is not None:
+    print("\nresult: " + str(graphResult1.x) + " " + str(graphResult1.y) + " " + str(graphResult1.cost))
+    print("Problem Space:")
+    for i in range(max_x+1):
+        for j in range(max_y+1):
+            print(graphResult1.state[i][j], end='')
+        print('')
+else:
+    print("\nresult: None")
