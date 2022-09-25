@@ -1,4 +1,5 @@
 import copy
+import time
 
 class Location:
     def __init__(self, x, y):
@@ -35,16 +36,20 @@ instance2 = [['W', 'W', 'W', 'W', 'W', 'W'],
              ['W', 'C', 'C', 'C', 'C', 'C']]
 
 
-def graphSearch(problemSpace, initialLocation) -> Node:
+def graphSearch(problemSpace, initialLocation):
+    # variables to hold the closed list and fringe list
     closed = []
     fringe = []
     fringe = Insert(Make_Node(initialLocation.x, initialLocation.y, problemSpace, 0), fringe)
+    # variables to store metrics
+    numOfGenerated = 0
+    numOfExpanded = 0
     while True:
         if len(fringe) == 0:
-            return None
+            return None, numOfGenerated, numOfExpanded
         currNode = fringe.pop(0)
         if Goal_Test(currNode.state):
-            return currNode
+            return currNode, numOfGenerated, numOfExpanded
         # expand currNode only if not already in the closed list
         nodeLocation = Location(currNode.x, currNode.y)
         found = False
@@ -54,7 +59,10 @@ def graphSearch(problemSpace, initialLocation) -> Node:
         if found == False:
             print(str(currNode.x) + ", " + str(currNode.y) + ";  " + str(closed))
             closed.append(nodeLocation)
-            fringe = Insert_All(Expand(currNode), fringe)
+            expandedNodes = Expand(currNode)
+            numOfGenerated = numOfGenerated + len(expandedNodes)
+            numOfExpanded = numOfExpanded + 1
+            fringe = Insert_All(expandedNodes, fringe)
 
 
 def Insert(node, fringe):
@@ -106,9 +114,15 @@ def Goal_Test(problemSpace) -> bool:
                 return False
     return True
 
-
+# run instance 1
+# record the start time
+startTime = time.time()
+# run the algorithm
 graphProbSpace1 = copy.deepcopy(instance1)
-graphResult1 = graphSearch(graphProbSpace1, Location(2,2))
+graphResult1, generated, expanded = graphSearch(graphProbSpace1, Location(2,2))
+# record the stop time
+endTime = time.time()
+
 if graphResult1 is not None:
     print("\nresult: " + str(graphResult1.x) + " " + str(graphResult1.y) + " " + str(graphResult1.cost))
     print("Problem Space:")
@@ -117,4 +131,28 @@ if graphResult1 is not None:
             print(graphResult1.state[i][j], end='')
         print('')
 else:
-    print("\nresult: None")
+    print("\nresult: No goal state found")
+
+print("Time taken: %.5f" % (endTime-startTime))
+print("Generated: " + str(generated) + ", Expanded: " + str(expanded) + "\n\n")
+
+# run instance 2
+startTime = time.time()
+# run the algorithm
+graphProbSpace2 = copy.deepcopy(instance2)
+graphResult2, generated, expanded = graphSearch(graphProbSpace2, Location(3,2))
+# record the stop time
+endTime = time.time()
+
+if graphResult2 is not None:
+    print("\nresult: (" + str(graphResult2.x) + ", " + str(graphResult2.y) + ") cost: " + str(graphResult2.cost))
+    print("Problem Space:")
+    for i in range(max_x+1):
+        for j in range(max_y+1):
+            print(graphResult2.state[i][j], end='')
+        print('')
+else:
+    print("\nresult: No goal state found")
+
+print("Time taken: %.5f" % (endTime-startTime))
+print("Generated: " + str(generated) + ", Expanded: " + str(expanded))
