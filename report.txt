@@ -21,15 +21,32 @@ Uniform cost tree search:
 
 Uniform cost graph search:
   Implementation description:
-  Results:
-    First 5 search nodes:
-    Total num of nodes expanded:
-    Total num of nodes generated:
-    CPU execution time:
-    Solution:
-      Sequence of moves:
-      Number of moves:
-      Cost:
+    The algorithm is written directly from the pseudocode in the homework document.
+    The algorithm expands nodes starting from the initial location of the vacuum.
+    Nodes cannot be expanded if they have already been expanded before.
+    Nodes are expanded in order of least cost
+    An expanded node generates nodes for moving Left, Right, Up, and Down, unless that move would take the vacuum outside of the world.
+      It also generates a node for Suck if the location is Dirty ('D')
+  Results on instance 1:
+    First 5 search nodes: {(2,2), (3,2), (1,2), (2,3), (2,1)}
+    Total num of nodes expanded: 20
+    Total num of nodes generated: 65
+    CPU execution time: 0 seconds
+    Solution: No solution found
+      Sequence of moves: N/A
+      Number of moves: N/A
+      Cost: N/A
+      Explanation: The algorithm does not allow a node to be expanded again once expanded. This means each node can only be expanded based on the path of least cost to reach it. This does not necessarily mean that a path to a solution will be found, as to clean all rooms we might have to deviate from the least cost path. In the example space, a solution is not found.
+  Results on instance 2:
+    First 5 search nodes: {(3,2), (4,2), (2,2), (3,3), (3,1)}
+    Total num of nodes expanded: 20
+    Total num of nodes generated: 66
+    CPU execution time: 0 seconds
+    Solution: No solution found
+      Sequence of moves: N/A
+      Number of moves: N/A
+      Cost: N/A
+      Explanation: Same as instance 1
 
 Iterative deepening tree search:
   Implementation description:
