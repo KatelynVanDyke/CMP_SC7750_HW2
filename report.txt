@@ -9,15 +9,22 @@ Programming language used:
 
 Uniform cost tree search:
   Implementation description:
-  Results:
-    First 5 search nodes:
-    Total num of nodes expanded:
-    Total num of nodes generated:
-    CPU execution time:
-    Solution:
-      Sequence of moves:
-      Number of moves:
-      Cost:
+  Results on instance 1:
+    First 5 search nodes: {(2,2), (3,2), (1,2), (2,3), (2,1)}
+    Total num of nodes expanded: 21666
+    Total num of nodes generated: 74343
+    CPU execution time: 69.2 seconds
+    Solution: No Solution
+      Sequence of moves: {Up, Suck, Down, Right, Right, Suck, Down, Right, Suck}
+      Number of moves: 9
+      Cost: 6.7
+  Results on instance 2:
+    First 5 search nodes: {(3,2), (4,2), (2,2), (3,3), (3,1)}
+    Total num of nodes expanded: 57865
+    Total num of nodes generated: 204045
+    CPU execution time: 10 minutes (timeout!)
+    Solution: No Solution
+
 
 Uniform cost graph search:
   Implementation description:
@@ -47,6 +54,7 @@ Uniform cost graph search:
       Number of moves: N/A
       Cost: N/A
       Explanation: Same as instance 1
+
 
 Iterative deepening tree search:
   Implementation description:
