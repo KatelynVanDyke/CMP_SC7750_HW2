@@ -4,6 +4,9 @@ Names of team members:
 
 Programming language used:
   Python
+  
+Hardware Used:
+  Dell and MacBook laptops
 
 ------------------------------
 
@@ -58,12 +61,29 @@ Uniform cost graph search:
 
 Iterative deepening tree search:
   Implementation description:
-  Results:
-    First 5 search nodes:
-    Total num of nodes expanded:
-    Total num of nodes generated:
-    CPU execution time:
+    The algorithm is written directly from the pseudocode in the homework document.
+    The algorithm expands nodes starting from the initial location of the vacuum.
+    Nodes are generated in a DFS pattern and expanded in a BFS pattern at the leaves.
+    The result is a DFS that is capped at each level as it expands.
+    Cost is calculated using the final path returned by the goalTest.
+    Path is not guaranteed to be the most efficient.
+  Results on Instance 1:
+    First 5 search nodes: {(2,2), (1,2), (2,1), (2,3), (3,2)} 
+    Total num of nodes expanded: 4,096
+    Total num of nodes generated: 15,155
+    CPU execution time: 14 seconds
     Solution:
-      Sequence of moves:
-      Number of moves:
-      Cost:
+      Sequence of moves: up -> right -> right -> down -> down -> right
+      Number of moves: 6
+      Cost: 6.7
+      Explanation: the solution was found at level 6. The algorithm generates some nodes with no data. This data may or may not be overwrited, meaning there's room for improvements to space/time complexity. The solution found may not be the cheapest path, it was just the first discoverable one.
+   Results on Instance 2:
+    First 5 search nodes: {(3,2), (3,1), (2,1), (3,3), (4,2)} 
+    Total num of nodes expanded: 262,144
+    Total num of nodes generated: 969,932
+    CPU execution time: 10.77 minutes (timeout!)
+    Solution:
+      Sequence of moves: N/A
+      Number of moves: N/A
+      Cost: N/A
+      Explanation: by the time you get to level 9, the tree has grown so fast that a solution is not found in a reasonable amount of time. For this reason, a tree search algorithm is not optimal.
